@@ -4,7 +4,6 @@ import random
 # dictionary
 # from admin_investment import *
 from admin_investment import *
-from email_validation import *
 
 from start import *
 
@@ -77,7 +76,6 @@ def accountNumberValidation(account_number):
 
 def register():
     print("Please Register your new account")
-    # email = validate_email(email)
     first_name = input("Enter first Name \n")
     last_name = input("Enter last Name \n")
     password = input("Create password \n")
@@ -131,8 +129,6 @@ def bankOperation(user):
 def setCurrentBalance(deposit):
     for account_number, user_details in database.items():
         current_bal = user_details[4] + deposit
-        # current_bal = user_details[4]
-        # user_details[4] = user_details[4] + deposit
         print("Your current balance is " + str(current_bal))
         return current_bal
 
@@ -141,11 +137,6 @@ def getCurrentBalance(user_detail):
     return "Your current balance is" + str(user_detail[4])
 
 
-#     return user_detail[4]
-
-# def check_balance(user_detail):
-#     balance = balance + user_detail[4]
-#     return ("Your current balance is" + balance)
 def withdrawal(amount):
     for account_number, user_details in database.items():
         user_details[4] = user_details[4] - amount
@@ -181,28 +172,11 @@ def depositOperation():
     whatToDoNext()
 
 
-# def investment_check():
-#     enter = int(input("Do you have an account with BankEagle?\n"
-#                       "Press 1 for Yes\n"
-#                       "Press 2 for No\n"))
-#     if enter == 1:
-#         investment()
-#     elif enter == 2:
-#         print("Please register with BankEagle to access the investment")
-#         register()
-#         investment()
-#     else:
-#         print("You have entered an invalid option")
-
-
-#
-
-
 def whatToDoNext():
     try:
         proceed = int(input(("Do you want to perform another transaction\n"
                              "Press 1 to continue \n"
-                             "Press 2 to exit")))
+                             "Press 2 to exit \n")))
     except ValueError:
         print("Please input the ")
 

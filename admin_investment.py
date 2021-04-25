@@ -1,60 +1,67 @@
 from eagle import *
 
+bought_units = 0
+
 
 def message():
     try:
         unit = int(input("The payout type for investment is capital + profit and it would paid on maturity\n"
                          "A unit of the investment is N50 \n"
                          "Please enter the amount of Units you would like to buy: \n"))
+        global bought_units
+        bought_units = unit * 50
     except ValueError:
         print("Please press the correct option for your investment")
-    bought_unit = unit * 50
-    return bought_unit
 
 
-def unit_to_buy_in_naira_value():
-    for unit, bought_unit in message():
-        # try:
-        #     bought_unit = unit * 50
-        # except ValueError:
-        #     print("Please press the correct number of unit for your investment")
-        #     unit_to_buy_in_naira_value()
-
-        if bought_unit < getCurrentBalance():
+def bought_unit():
+    global bought_units
+    for account_number, user_details in database.items():
+        if bought_units > user_details[4]:
             print("insufficient balance\n"
                   "Please make a deposit into your account to continue")
         else:
-            print("You purchased " + bought_unit + "amount of investment\n")
+            print("You purchased " + str(bought_units) + "worth of investment\n")
 
 
 def calc_cassava():
-    print(unit_to_buy_in_naira_value())
-    calc = ((unit_to_buy_in_naira_value() * 36) / 100) * 18
-    investment_return = calc + unit_to_buy_in_naira_value()
-
-    print("You  would receive" + str(investment_return) + "at maturity\n")
+    message()
+    bought_unit()
+    global bought_units
+    calc = ((bought_units * 36) / 100) * 18
+    investment_return = calc + bought_units
+    print("You  would receive " + str(investment_return) + " at maturity\n")
+    whatToDoNext()
 
 
 def calc_cattle():
-    calc = ((unit_to_buy_in_naira_value() * 16) / 100) * 12
-    investment_return = calc + unit_to_buy_in_naira_value()
-    print("You purchased " + str(message()) + "amount of investment\n"
-                                              "You  would receive" + str(investment_return) + "at maturity")
+    message()
+    bought_unit()
+    global bought_units
+    calc = ((bought_units * 16) / 100) * 12
+    investment_return = calc + bought_units
+    print("You  would receive" + str(investment_return) + "at maturity\n")
 
 
 def calc_transport():
-    calc = ((unit_to_buy_in_naira_value() * 17) / 100) * 12
-    investment_return = calc + unit_to_buy_in_naira_value()
+    message()
+    bought_unit()
+    global bought_units
+    calc = ((bought_units * 17) / 100) * 12
+    investment_return = calc + bought_units
 
-    print("You purchased " + str(message()) + "amount of investment\n"
-                                              "You  would receive" + str(investment_return) + "at maturity")
+    print("You  would receive" + str(investment_return) + "at maturity")
+    whatToDoNext()
 
 
 def calc_real_estate():
-    calc = ((unit_to_buy_in_naira_value() * 20) / 100) * 6
-    investment_return = calc + unit_to_buy_in_naira_value()
-    print("You purchased " + str(message()) + "amount of investment\n"
-                                              "You would receive" + str(investment_return) + "at maturity\n")
+    message()
+    bought_unit()
+    global bought_units
+    calc = ((bought_units * 20) / 100) * 6
+    investment_return = calc + bought_units
+    print("You would receive" + str(investment_return) + "at maturity\n")
+    whatToDoNext()
 
 
 def investment():

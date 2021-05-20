@@ -1,15 +1,13 @@
 import email
 import random
+import validation
 
 # dictionary
 # from admin_investment import *
 from admin_investment import *
+import database
 
 from start import *
-
-database = {
-    8651378502: ['Adunni', 'Eagle', 'sobamboadedotun@gmail.com', 'password', 200]
-}
 
 
 def init():
@@ -35,7 +33,7 @@ def login():
     print("=== ==== === Login === === ===")
 
     account_number_from_user = input("Enter account number \n")
-    is_valid_account_number = accountNumberValidation(account_number_from_user)
+    is_valid_account_number = validation.accountNumberValidation(account_number_from_user)
 
     if is_valid_account_number:
         password = input("Enter password \n")
@@ -50,52 +48,30 @@ def login():
         init()
 
 
-def accountNumberValidation(account_number):
-    if account_number:
-
-        if len(str(account_number)) == 10:
-
-            try:
-                int(account_number)
-                return True
-            except ValueError:
-                print("Invalid Account Number, account number should not contain alphabets")
-                return False
-            except TypeError:
-                print("Invalid account type")
-                return False
-
-        else:
-            print("Please enter a 10 digit account number")
-            return False
-
-    else:
-        print("Account number is a require field")
-        return False
-
-
 def register():
     print("Please Register your new account")
     first_name = input("Enter first Name \n")
     last_name = input("Enter last Name \n")
+    mail = input("Enter e-mail \n")
     password = input("Create password \n")
 
-    try:
-        account_number = generateAccountNumber()
-    except ValueError:
-        print("Account generation failed due to connection failure")
-        init()
-    # account number is forming the key and the information(value) is the form
-    # the list inside the dictionary
-    database[account_number] = [first_name, last_name, email, password, 0]
+    account_number = generateAccountNumber()
 
-    print("Your account has been created")
-    print("=== ==== === === === ===")
-    print("Your account number is: %d" % account_number)
-    print("make sure to keep it safe")
-    print("=== ==== === === === ===")
+    is_user_created = database.create(account_number, [first_name, last_name, mail, password, 0])
+    # use database module to create a new user record
 
-    login()
+    if is_user_created:
+
+        print("Your account has been created")
+        print("=== ==== === === === ===")
+        print("Your account number is: %d" % account_number)
+        print("make sure to keep it safe")
+        print("=== ==== === === === ===")
+
+        login()
+    else:
+        print("Please try again")
+        register()
 
 
 def bankOperation(user):

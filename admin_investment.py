@@ -63,6 +63,12 @@ def calc_real_estate():
     print("You would receive" + str(investment_return) + "at maturity\n")
     whatToDoNext()
 
+# def cryptocurrency():
+#     message()
+#     bought_unit()
+#     global bought_units
+#     calc = (bought_units * )
+
 
 def investment():
     try:
@@ -89,3 +95,4 @@ def investment():
         print("Invalid option selected")
         investment()
         whatToDoNext()
+

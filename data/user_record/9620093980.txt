@@ -1,0 +1,1 @@
+['Adunni', 'Eagle', <module 'email' from 'C:\\Users\\ADMIN\\AppData\\Local\\Programs\\Python\\Python38\\lib\\email\\__init__.py'>, 'pass', 0]
